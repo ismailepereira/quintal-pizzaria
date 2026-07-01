@@ -4,265 +4,191 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quintal Restaurante e Pizzaria — Ouro Preto do Oeste, RO</title>
-  <meta name="description" content="Quintal Restaurante e Pizzaria: sabor de família em Ouro Preto do Oeste (RO). Pizzas, pratos e um ambiente de quintal de verdade. Confira o cardápio, o ambiente e como chegar." />
+  <meta name="description" content="Quintal Restaurante e Pizzaria em Ouro Preto do Oeste (RO): pizza artesanal, pratos caseiros e o clima de um quintal de verdade. Veja o cardápio, o ambiente e como chegar." />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Quintal Restaurante e Pizzaria" />
-  <meta property="og:description" content="Sabor de família, direto do quintal. Ouro Preto do Oeste, RO." />
-  <meta property="og:image" content="assets/img/og-cover.jpg" />
+  <meta property="og:description" content="Pizza artesanal e clima de quintal de verdade. Ouro Preto do Oeste, RO." />
+  <meta property="og:image" content="assets/img/pizza-hero.jpg" />
   <meta property="og:locale" content="pt_BR" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23140d08' stroke='%23efe6f7' stroke-width='3'/%3E%3Ctext x='32' y='41' font-size='28' text-anchor='middle' fill='%23efe6f7' font-family='Georgia,serif'%3EQ%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%230c0a09' stroke='%23f5efe6' stroke-width='3'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23f5efe6' font-family='Georgia,serif'%3EQ%3C/text%3E%3C/svg%3E" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;0,800;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind (CDN, sem build) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            wood: { dark: '#140d08', mid: '#241a12', light: '#362513' },
-            glow: '#efe6f7',
-            amber: '#e8b04b',
-            cream: '#f4ede4',
-            leaf: { 1: '#3d5a2e', 2: '#4a6b38' },
-          },
-          fontFamily: {
-            display: ['"Playfair Display"', 'serif'],
-            body: ['"Karla"', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body class="font-body">
+<body>
 
-  <!-- textura de grão + brilho que segue o mouse (atmosfera) -->
-  <div class="grain" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
 
   <!-- ===== Nav ===== -->
   <nav class="site-nav">
-    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-      <a href="#topo" class="brand flex items-center gap-3">
-        <span class="emblem emblem--sm text-base">Q</span>
-        <span class="font-display text-glow text-lg tracking-wide">Quintal</span>
+    <div class="wrap nav-inner">
+      <a href="#topo" class="nav-logo" aria-label="Quintal — início">
+        <img src="assets/logo/quintal-branca.png" alt="Quintal Restaurante e Pizzaria" />
       </a>
-      <div class="hidden md:flex items-center gap-8 text-sm">
+      <div class="nav-links">
         <a href="#cardapio" class="nav-link">Cardápio</a>
-        <a href="#ambiente" class="nav-link">Ambiente</a>
+        <a href="#sobre" class="nav-link">Nossa história</a>
         <a href="#localizacao" class="nav-link">Localização</a>
-        <a href="#contato" class="nav-link">Contato</a>
+        <a href="https://wa.me/556934611766" target="_blank" rel="noopener" class="btn btn-wine" data-magnetic>Peça agora</a>
       </div>
-      <button id="nav-toggle" class="md:hidden text-glow" aria-label="Abrir menu" aria-expanded="false">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
-    <div id="nav-mobile" class="md:hidden hidden flex-col gap-1 px-6 pb-4 text-sm">
-      <a href="#cardapio" class="py-2 border-b border-white/10">Cardápio</a>
-      <a href="#ambiente" class="py-2 border-b border-white/10">Ambiente</a>
-      <a href="#localizacao" class="py-2 border-b border-white/10">Localização</a>
-      <a href="#contato" class="py-2">Contato</a>
+    <div id="nav-mobile">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#sobre">Nossa história</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#contato">Contato</a>
     </div>
   </nav>
 
   <!-- ===== Hero ===== -->
   <header id="topo" class="hero">
-    <!-- fio de luzes no topo -->
-    <svg class="string-lights" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
-      <path class="wire" d="M0,14 C150,54 300,54 450,20 S750,54 900,20 1050,50 1200,16" />
-      <circle class="bulb" cx="90"   cy="41" r="3.5" />
-      <circle class="bulb" cx="215"  cy="49" r="3.5" />
-      <circle class="bulb" cx="345"  cy="42" r="3.5" />
-      <circle class="bulb" cx="470"  cy="24" r="3.5" />
-      <circle class="bulb" cx="600"  cy="44" r="3.5" />
-      <circle class="bulb" cx="730"  cy="46" r="3.5" />
-      <circle class="bulb" cx="860"  cy="30" r="3.5" />
-      <circle class="bulb" cx="985"  cy="34" r="3.5" />
-      <circle class="bulb" cx="1110" cy="40" r="3.5" />
-    </svg>
-
-    <!-- string lights bokeh -->
-    <span class="bokeh" style="top:16%; left:10%; width:6px; height:6px;"></span>
-    <span class="bokeh" style="top:24%; left:24%; width:5px; height:5px;"></span>
-    <span class="bokeh" style="top:12%; left:66%; width:6px; height:6px;"></span>
-    <span class="bokeh" style="top:28%; left:86%; width:5px; height:5px;"></span>
-
-    <div class="max-w-6xl mx-auto px-6 pt-32 pb-24 grid md:grid-cols-2 gap-12 items-center relative z-10">
-      <div>
-        <p class="hero-eyebrow section-label mb-5" data-intro>
-          <span class="rule"></span> Ouro Preto do Oeste · RO
-        </p>
-        <h1 class="hero-title text-glow font-display">
-          <span class="line"><span data-intro>Sabor de família,</span></span>
-          <span class="line"><span data-intro>direto do <em>quintal.</em></span></span>
-        </h1>
-        <p class="hero-lede" data-intro>
-          Pizzas artesanais, pratos caseiros e aquele clima de quintal de verdade —
-          almoço, jantar e boas conversas embaixo das luzes.
-        </p>
-        <div class="hero-cta flex flex-wrap gap-4" data-intro>
-          <a href="#cardapio" class="btn-amber" data-magnetic>Ver cardápio</a>
-          <!-- confirmar número de WhatsApp -->
-          <a href="https://wa.me/556934611766" target="_blank" rel="noopener" class="btn-outline" data-magnetic>Chamar no WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="hero-stage mx-auto" data-intro-canvas>
-        <span class="stage-halo" aria-hidden="true"></span>
-        <div class="pizza-disc">
-          <img src="assets/img/pizza-hero.jpg" alt="Pizza artesanal assada na hora no Quintal" />
-        </div>
-        <span class="pizza-ring" aria-hidden="true"></span>
-        <span class="ingredient i-tomato" aria-hidden="true"></span>
-        <span class="ingredient i-basil" aria-hidden="true"></span>
-        <span class="ingredient i-lemon" aria-hidden="true"></span>
-        <span class="ingredient i-olive" aria-hidden="true"></span>
+    <div class="hero-bg" aria-hidden="true">
+      <img src="assets/img/pizza-hero.jpg" alt="" />
+    </div>
+    <div class="hero-inner">
+      <img class="hero-logo" src="assets/logo/quintal-branca.png" alt="Quintal Restaurante e Pizzaria" data-intro />
+      <p class="hero-tagline" data-intro>
+        Pizza artesanal assada na hora, pratos caseiros e o clima de um quintal de verdade —
+        em Ouro Preto do Oeste, com aquele gosto de comida de família.
+      </p>
+      <div class="hero-cta" data-intro>
+        <a href="#cardapio" class="btn btn-primary" data-magnetic>Ver cardápio</a>
+        <a href="https://wa.me/556934611766" target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic>Pedir no WhatsApp</a>
       </div>
     </div>
 
-    <div class="scroll-cue" data-intro>
-      <span>rolar</span>
-      <span class="track"></span>
+    <div class="hero-strip" aria-hidden="true">
+      <div class="marquee">
+        <span>Pizza artesanal</span><span class="dot">•</span>
+        <span>Massa de fermentação natural</span><span class="dot">•</span>
+        <span>Ingredientes selecionados</span><span class="dot">•</span>
+        <span>Ambiente ao ar livre</span><span class="dot">•</span>
+        <span>Delivery</span><span class="dot">•</span>
+        <span>Almoço e jantar</span><span class="dot">•</span>
+      </div>
     </div>
   </header>
 
-  <!-- ===== Cardápio ===== -->
-  <section id="cardapio" class="relative py-24 bg-wood-dark">
-    <div class="floaties">
-      <span class="floaty floaty--tomato" data-depth="0.02" style="top:18%; left:6%; width:14px; height:14px;"></span>
-      <span class="floaty floaty--lemon" data-depth="0.03" style="top:60%; left:12%; width:10px; height:10px;"></span>
-      <span class="floaty floaty--basil" data-depth="0.015" style="top:30%; right:10%; width:12px; height:12px;"></span>
-      <span class="floaty floaty--amber" data-depth="0.025" style="top:75%; right:6%; width:16px; height:16px;"></span>
-    </div>
-
-    <div class="max-w-5xl mx-auto px-6 relative z-10">
-      <p class="section-label reveal"><span class="idx">01</span> O que sai da cozinha</p>
-      <h2 class="section-title font-display text-glow mt-3 mb-12 reveal">Cardápio</h2>
-
-      <div id="menu-list" class="space-y-16">
-        <!-- preenchido via JS a partir de assets/data/menu.json -->
+  <!-- ===== Diferenciais ===== -->
+  <section class="section diffs">
+    <div class="wrap">
+      <p class="eyebrow reveal"><span class="rule"></span> Como trabalhamos</p>
+      <h2 class="section-title reveal" style="margin-top:0.8rem;">Do quintal para a sua mesa</h2>
+      <div class="diff-grid">
+        <div class="diff reveal"><div class="num">01</div><h3>Massa artesanal</h3><p>Fermentação lenta e assada na hora, leve e crocante na medida.</p></div>
+        <div class="diff reveal"><div class="num">02</div><h3>Ingredientes de verdade</h3><p>Recheio generoso, mussarela de qualidade e sabor de comida caseira.</p></div>
+        <div class="diff reveal"><div class="num">03</div><h3>Três tamanhos</h3><p>Grande (12 fatias), média (8) e pequena (6) — do casal à turma toda.</p></div>
+        <div class="diff reveal"><div class="num">04</div><h3>Clima de quintal</h3><p>Mesas ao ar livre, luzes penduradas e aquele tempo de ficar sem pressa.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Ambiente ===== -->
-  <section id="ambiente" class="relative py-24 bg-wood-mid">
-    <div class="floaties">
-      <span class="floaty floaty--tomato" data-depth="0.02" style="top:20%; left:80%; width:12px; height:12px;"></span>
-      <span class="floaty floaty--basil" data-depth="0.03" style="top:70%; left:8%; width:14px; height:14px;"></span>
-    </div>
+  <!-- ===== Band (foto forno) ===== -->
+  <section class="band" aria-hidden="false">
+    <img src="assets/img/forno.jpg" alt="Pizza saindo do forno no Quintal" />
+    <div class="band-quote"><p class="reveal">"Comida boa é a que se come sem pressa, entre amigos."</p></div>
+  </section>
 
-    <div class="max-w-6xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-      <!-- cena noturna composta (placeholder ilustrado; trocar por foto real depois) -->
-      <div class="ambiente-scene aspect-[4/3] reveal order-2 md:order-1">
-        <div class="sky-glow"></div>
-        <svg class="amb-wire" viewBox="0 0 600 210" preserveAspectRatio="none" aria-hidden="true">
-          <path class="wire" d="M0,20 C120,80 240,80 360,30 S540,80 600,26" />
-          <circle class="bulb" cx="70"  cy="55" r="4" />
-          <circle class="bulb" cx="160" cy="70" r="4" />
-          <circle class="bulb" cx="250" cy="58" r="4" />
-          <circle class="bulb" cx="345" cy="34" r="4" />
-          <circle class="bulb" cx="440" cy="55" r="4" />
-          <circle class="bulb" cx="530" cy="52" r="4" />
-        </svg>
-        <span class="frond" style="left:12%; transform:rotate(-8deg);"></span>
-        <span class="frond" style="right:12%; transform:rotate(8deg);"></span>
-        <span class="table"></span>
-        <span class="candle"></span>
-        <span class="floor"></span>
+  <!-- ===== Cardápio ===== -->
+  <section id="cardapio" class="section">
+    <div class="wrap">
+      <div class="floaties">
+        <span class="floaty floaty--tomato" data-depth="0.02" style="top:14%; left:5%; width:12px; height:12px;"></span>
+        <span class="floaty floaty--amber" data-depth="0.03" style="top:70%; right:6%; width:14px; height:14px;"></span>
+        <span class="floaty floaty--basil" data-depth="0.015" style="top:40%; right:12%; width:10px; height:10px;"></span>
       </div>
-      <div class="order-1 md:order-2">
-        <p class="section-label mb-4 reveal"><span class="idx">02</span> O clima</p>
-        <h2 class="section-title font-display text-glow mb-6 reveal">Um quintal de verdade</h2>
-        <p class="hero-lede reveal" style="max-width:none;">
-          Mesas ao ar livre, luzes amarelas penduradas entre as árvores e aquele clima
-          de quintal de casa de família — feito pra ficar, comer bem e não ter pressa.
-        </p>
-        <p class="reveal" style="color:rgba(244,237,228,0.6); line-height:1.6;">
-          Almoço de segunda a sábado, das 11h às 14h. Jantar de terça a domingo, das 18h às 23h.
-        </p>
+      <p class="eyebrow reveal"><span class="rule"></span> O que sai da cozinha</p>
+      <h2 class="section-title reveal" style="margin-top:0.8rem;">Cardápio</h2>
+      <p class="menu-note reveal">Todas as pizzas em três tamanhos — Grande (12 fatias) · Média (8) · Pequena (6). Preços a partir do tamanho grande.</p>
+      <div id="menu-list"><!-- preenchido via JS a partir de assets/data/menu.json --></div>
+    </div>
+  </section>
+
+  <!-- ===== Sobre / Nossa história ===== -->
+  <section id="sobre" class="section" style="background:var(--bg-2);">
+    <div class="wrap sobre-grid">
+      <div class="sobre-photo reveal">
+        <img src="assets/img/ambiente.jpg" alt="Ambiente do Quintal à noite" />
+      </div>
+      <div class="sobre-text">
+        <p class="eyebrow reveal"><span class="rule"></span> Nossa história</p>
+        <h2 class="section-title reveal" style="margin-top:0.8rem;">Um quintal de verdade</h2>
+        <p class="lead reveal">O Quintal nasceu da vontade de receber as pessoas como se recebe em casa: no quintal, com boa comida e tempo de sobra.</p>
+        <p class="reveal">Mesas ao ar livre, luzes amarelas penduradas entre as árvores e aquele clima de quintal de família — feito pra ficar, comer bem e não ter pressa.</p>
+        <p class="reveal">Almoço de segunda a sábado, das 11h às 14h. Jantar de terça a domingo, das 18h às 23h.</p>
       </div>
     </div>
   </section>
 
   <!-- ===== Localização ===== -->
-  <section id="localizacao" class="relative py-24 bg-wood-dark">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <p class="section-label mb-4 reveal"><span class="idx">03</span> Como chegar</p>
-        <h2 class="section-title font-display text-glow mb-6 reveal">Localização</h2>
+  <section id="localizacao" class="section">
+    <div class="wrap loc-grid">
+      <div class="loc-info">
+        <p class="eyebrow reveal"><span class="rule"></span> Como chegar</p>
+        <h2 class="section-title reveal" style="margin-top:0.8rem;">Localização</h2>
         <!-- confirmar endereço exato -->
-        <p class="text-white/70 mb-6 reveal">Ouro Preto do Oeste — RO</p>
-        <a
-          href="https://www.google.com/maps/place/Quintal+Restaurante+e+Pizzaria/@-10.7218786,-62.2528411,17z/data=!3m1!4b1!4m6!3m5!1s0x93c97d59fdd412df:0xbb072a278e4862bb!8m2!3d-10.7218786!4d-62.2502662!16s%2Fg%2F11gdkzzmn7"
-          target="_blank" rel="noopener" class="btn-amber reveal">
+        <p class="big reveal" style="margin-top:1rem;">Ouro Preto do Oeste — RO</p>
+        <p class="reveal">Almoço: seg–sáb, 11h–14h</p>
+        <p class="reveal" style="margin-bottom:1.6rem;">Jantar: ter–dom, 18h–23h</p>
+        <a class="btn btn-primary reveal" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/place/Quintal+Restaurante+e+Pizzaria/@-10.7218786,-62.2528411,17z/data=!3m1!4b1!4m6!3m5!1s0x93c97d59fdd412df:0xbb072a278e4862bb!8m2!3d-10.7218786!4d-62.2502662!16s%2Fg%2F11gdkzzmn7">
           Abrir no Google Maps
         </a>
       </div>
-      <div class="map-frame aspect-[4/3] reveal">
-        <iframe
-          title="Mapa — Quintal Restaurante e Pizzaria"
+      <div class="map-frame reveal">
+        <iframe title="Mapa — Quintal Restaurante e Pizzaria"
           src="https://www.google.com/maps?q=-10.7218786,-62.2502662&z=16&output=embed"
-          width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+          width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ===== Contato / Rodapé ===== -->
-  <footer id="contato" class="relative py-16 bg-wood-mid">
-    <span class="plant plant--1" style="left:6%; transform:rotate(-18deg);"></span>
-    <span class="plant plant--2" style="left:9%; transform:rotate(-6deg);"></span>
-    <span class="plant plant--1" style="right:8%; transform:rotate(14deg);"></span>
-    <span class="plant plant--2" style="right:5%; transform:rotate(4deg);"></span>
-
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 relative z-10">
-      <div>
-        <span class="font-display text-glow text-2xl">Quintal</span>
-        <p class="text-white/60 text-sm mt-2">Restaurante e Pizzaria</p>
+  <!-- ===== Rodapé / Contato ===== -->
+  <footer id="contato">
+    <div class="wrap foot-grid">
+      <div class="foot-logo">
+        <img src="assets/logo/quintal-branca.png" alt="Quintal Restaurante e Pizzaria" />
+        <p style="color:var(--ink-dim); font-size:0.88rem; max-width:22rem;">Pizza artesanal e clima de quintal de verdade, em Ouro Preto do Oeste (RO).</p>
       </div>
-      <div class="text-sm text-white/70 space-y-2">
+      <div>
+        <p class="foot-h">Contato</p>
         <!-- confirmar telefone/whatsapp -->
         <p><a href="tel:+556934611766">(69) 3461-1766</a></p>
+        <p><a href="https://wa.me/556934611766" target="_blank" rel="noopener">WhatsApp</a></p>
         <p><a href="https://www.instagram.com/quintal.opo/" target="_blank" rel="noopener">@quintal.opo</a></p>
       </div>
-      <div class="text-sm text-white/70 space-y-1">
-        <p>Almoço: seg–sáb, 11h–14h</p>
-        <p>Jantar: ter–dom, 18h–23h</p>
+      <div>
+        <p class="foot-h">Horários</p>
+        <p style="color:var(--ink-dim);">Almoço: seg–sáb, 11h–14h</p>
+        <p style="color:var(--ink-dim);">Jantar: ter–dom, 18h–23h</p>
       </div>
     </div>
-    <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-white/10 text-xs text-white/40 relative z-10">
-      © <span id="ano"></span> Quintal Restaurante e Pizzaria
+    <div class="wrap foot-bottom">
+      <span>© <span id="ano"></span> Quintal Restaurante e Pizzaria</span>
+      <span>Ouro Preto do Oeste · RO</span>
     </div>
   </footer>
 
-  <!-- ===== Scripts (CDN, sem build) ===== -->
+  <!-- ===== Scripts ===== -->
   <script type="importmap">
     { "imports": { "motion": "https://cdn.jsdelivr.net/npm/motion@11/+esm" } }
   </script>
-
   <script type="module" src="assets/js/main.js"></script>
 
-  <!-- Rede de segurança: se as animações não rodarem (CDN/JS off), revela tudo -->
   <script>
     addEventListener("load", function () {
       setTimeout(function () {
         if (window.__motionOK) return;
-        document.querySelectorAll(".reveal,[data-intro]").forEach(function (el) {
-          el.style.opacity = 1; el.style.transform = "none";
-        });
-        document.querySelectorAll(".hero-title .line > span").forEach(function (el) { el.style.transform = "translateY(0)"; });
-        var w = document.querySelector("[data-intro-canvas]"); if (w) w.style.opacity = 1;
+        document.querySelectorAll(".reveal,[data-intro]").forEach(function (el) { el.style.opacity = 1; el.style.transform = "none"; });
       }, 2500);
     });
   </script>

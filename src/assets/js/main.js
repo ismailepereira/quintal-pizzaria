@@ -15,14 +15,12 @@ window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion
   var navMobile = document.getElementById("nav-mobile");
   if (navToggle && navMobile) {
     navToggle.addEventListener("click", function () {
-      var isOpen = navMobile.classList.toggle("flex");
-      navMobile.classList.toggle("hidden");
+      var isOpen = navMobile.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
     navMobile.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", function () {
-        navMobile.classList.add("hidden");
-        navMobile.classList.remove("flex");
+        navMobile.classList.remove("open");
         navToggle.setAttribute("aria-expanded", "false");
       });
     });
@@ -62,24 +60,17 @@ window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion
   /* ---- rede de segurança: garante conteúdo visível ---- */
   function forceShow(sel) {
     document.querySelectorAll(sel).forEach(function (el) { el.style.opacity = 1; el.style.transform = "none"; });
-    document.querySelectorAll(".hero-title .line > span[data-intro]").forEach(function (el) { el.style.transform = "translateY(0)"; });
-    var w = document.querySelector("[data-intro-canvas]");
-    if (w) { w.style.opacity = 1; w.style.transform = "none"; }
   }
 
   /* ---- intro orquestrada (Motion + spring) ---- */
   function runIntro() {
     if (reduceMotion) { forceShow("[data-intro]"); return; }
     try {
-      animate(".hero-eyebrow[data-intro]", { opacity: [0, 1], y: [12, 0] }, { duration: 0.6, delay: 0.15, easing: EASE });
-      animate(".hero-title .line > span[data-intro]", { y: ["110%", "0%"] },
-        { duration: 0.9, delay: stagger(0.12, { start: 0.35 }), easing: EASE });
-      animate(".hero-lede[data-intro]", { opacity: [0, 1], y: [18, 0] }, { duration: 0.7, delay: 0.7, easing: EASE });
-      animate(".hero-cta[data-intro]", { opacity: [0, 1], y: [18, 0] }, { duration: 0.7, delay: 0.9, easing: EASE });
-      animate("[data-intro-canvas]", { opacity: [0, 1], scale: [0.9, 1] },
-        { type: "spring", stiffness: 60, damping: 14, delay: 0.35 });
-      animate(".scroll-cue[data-intro]", { opacity: [0, 1] }, { duration: 0.6, delay: 1.5 });
-      setTimeout(function () { forceShow("[data-intro]"); }, 3200); // garante estado final
+      animate(".hero-logo[data-intro]", { opacity: [0, 1], y: [24, 0], scale: [0.94, 1] },
+        { type: "spring", stiffness: 60, damping: 14, delay: 0.2 });
+      animate(".hero-tagline[data-intro]", { opacity: [0, 1], y: [18, 0] }, { duration: 0.7, delay: 0.6, easing: EASE });
+      animate(".hero-cta[data-intro]", { opacity: [0, 1], y: [18, 0] }, { duration: 0.7, delay: 0.85, easing: EASE });
+      setTimeout(function () { forceShow("[data-intro]"); }, 2600); // garante estado final
     } catch (e) { forceShow("[data-intro]"); }
   }
   runIntro();
@@ -94,7 +85,7 @@ window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion
   document.querySelectorAll(".reveal").forEach(reveal);
 
   /* ---- nav active link por seção ---- */
-  ["cardapio", "ambiente", "localizacao", "contato"].forEach(function (id) {
+  ["cardapio", "sobre", "localizacao"].forEach(function (id) {
     var sec = document.getElementById(id);
     var link = document.querySelector('.nav-link[href="#' + id + '"]');
     if (!sec || !link) return;
@@ -125,24 +116,25 @@ window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion
       if (!container) return;
       categorias.forEach(function (cat) {
         var section = document.createElement("div");
+        section.className = "menu-cat";
         var title = document.createElement("h3");
-        title.className = "font-display text-glow text-3xl mb-6 reveal";
+        title.className = "reveal";
         title.textContent = cat.categoria;
         section.appendChild(title);
 
         var grid = document.createElement("div");
-        grid.className = "grid sm:grid-cols-2 gap-4";
+        grid.className = "menu-grid";
         cat.itens.forEach(function (item) {
-          var card = document.createElement("div");
-          card.className = "menu-card reveal";
-          card.innerHTML =
+          var it = document.createElement("div");
+          it.className = "menu-item reveal";
+          it.innerHTML =
             '<div class="row">' +
               '<span class="nome">' + item.nome + '</span>' +
               '<span class="leader"></span>' +
               '<span class="preco">R$ ' + item.preco + '</span>' +
             '</div>' +
             '<p class="desc">' + item.descricao + '</p>';
-          grid.appendChild(card);
+          grid.appendChild(it);
         });
         section.appendChild(grid);
         container.appendChild(section);
