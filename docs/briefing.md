@@ -44,7 +44,7 @@ Referência principal: [Pizza 4P's (Awwwards)](https://www.awwwards.com/sites/pi
 
 ## Arquitetura técnica
 
-Sem build step — HTML/CSS/JS puro, Tailwind + GSAP + Three.js via CDN. Segue o padrão dos outros projetos de cliente (ex: jessica-machado): pasta `src/` isolada é a única coisa publicada/deployada.
+Sem build step — HTML/CSS/JS puro, Tailwind + GSAP + Three.js via CDN. Segue o padrão dos outros projetos de cliente (ex: jessica-machado): pasta `src/` isolada é a única coisa publicada/deployada, incluindo `robots.txt`, `sitemap.xml`, favicon e meta tags Open Graph (título, descrição, imagem de compartilhamento) no `<head>` do `index.html`.
 
 ```
 quintal-pizzaria/
@@ -98,7 +98,7 @@ Formato:
   ]}
 ]
 ```
-Placeholder com 6-8 itens fictícios típicos de pizzaria nesta fase; cliente edita depois sem mexer no HTML/JS.
+Placeholder com 6-8 itens fictícios nesta fase, cobrindo mais de uma categoria (ex: Pizzas + Bebidas/Sobremesas, já que o nome é "restaurante e pizzaria", não só pizzaria); cliente edita depois sem mexer no HTML/JS.
 
 ### Deploy
 
@@ -110,7 +110,8 @@ Placeholder com 6-8 itens fictícios típicos de pizzaria nesta fase; cliente ed
 
 - Pedido online / delivery / integração iFood
 - Blog, eventos, depoimentos de clientes
-- Fotografia real, cardápio real, confirmação de WhatsApp/endereço/horário exatos
+- Fotografia real, cardápio real
+- **Confirmação** de WhatsApp/endereço/horário exatos — os campos aparecem normalmente na UI com os dados encontrados; só a validação final desses dados fica pendente (marcada com comentário HTML), não a omissão dos campos
 - Logo digital oficial (usamos wordmark recriada a partir do letreiro)
 
 ## Testes / verificação
