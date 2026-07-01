@@ -1,0 +1,290 @@
+/* ===== Design tokens — paleta extraída da fachada real do Quintal ===== */
+:root {
+  --wood-dark: #140d08;
+  --wood-mid: #241a12;
+  --wood-light: #362513;
+
+  --glow: #efe6f7;
+  --glow-soft: rgba(232, 220, 245, 0.55);
+
+  --amber: #e8b04b;
+  --amber-soft: rgba(232, 176, 75, 0.5);
+
+  --leaf-1: #3d5a2e;
+  --leaf-2: #4a6b38;
+
+  --tomato: #c0392b;
+  --lemon: #f1c40f;
+  --basil: #6b8e23;
+
+  --cream: #f4ede4;
+  --cream-dim: #cbb89d;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Jost", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--wood-dark);
+  color: var(--cream);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.text-glow {
+  color: var(--glow);
+  text-shadow: 0 0 18px var(--glow-soft);
+}
+
+.btn-amber {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--amber);
+  color: var(--wood-dark);
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px var(--amber-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-amber:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px var(--amber-soft);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--glow-soft);
+  color: var(--cream);
+  font-family: var(--font-body);
+  padding: 0.8rem 1.65rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--glow);
+  background: rgba(239, 230, 247, 0.06);
+}
+
+/* ===== Nav ===== */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(20, 13, 8, 0.85), rgba(20, 13, 8, 0));
+}
+
+#nav-mobile {
+  background: var(--wood-dark);
+  border-top: 1px solid rgba(232, 220, 245, 0.1);
+}
+
+.site-nav a {
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.site-nav a:hover {
+  opacity: 1;
+}
+
+/* ===== Emblema "Q" (logo recriada) ===== */
+.emblem {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  border: 2px solid var(--glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 22px var(--glow-soft), inset 0 0 14px rgba(232, 220, 245, 0.25);
+  font-family: var(--font-display);
+  color: var(--glow);
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(232, 176, 75, 0.14), transparent 45%),
+    radial-gradient(ellipse at 85% 5%, rgba(232, 176, 75, 0.1), transparent 40%),
+    linear-gradient(160deg, var(--wood-mid), var(--wood-dark));
+  overflow: hidden;
+}
+
+.hero-canvas-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 480px;
+}
+
+#hero-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* fallback estático sem WebGL */
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-fallback .emblem {
+  width: 9rem;
+  height: 9rem;
+  font-size: 2.25rem;
+}
+
+.no-webgl .hero-fallback {
+  display: flex;
+}
+
+.no-webgl #hero-canvas {
+  display: none;
+}
+
+/* string lights bokeh no topo do hero */
+.bokeh {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 16px 5px var(--amber-soft);
+  pointer-events: none;
+}
+
+/* ===== Pontinhos flutuantes (acento decorativo, todas as seções) ===== */
+.floaties {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floaty {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.75;
+}
+
+.floaty--tomato { background: var(--tomato); box-shadow: 0 0 14px rgba(192, 57, 43, 0.5); }
+.floaty--lemon  { background: var(--lemon);  box-shadow: 0 0 12px rgba(241, 196, 15, 0.5); }
+.floaty--basil  { background: var(--basil);  box-shadow: 0 0 12px rgba(107, 142, 35, 0.5); }
+.floaty--amber  { background: var(--amber);  box-shadow: 0 0 16px var(--amber-soft); }
+
+/* ===== Seções ===== */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: var(--amber);
+}
+
+/* ===== Cardápio ===== */
+.menu-card {
+  background: rgba(244, 237, 228, 0.03);
+  border: 1px solid rgba(232, 220, 245, 0.12);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.menu-card:hover {
+  border-color: var(--glow-soft);
+  transform: translateY(-3px);
+}
+
+.menu-card .preco {
+  color: var(--amber);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+/* ===== Ambiente ===== */
+.ambiente-frame {
+  border-radius: 1rem;
+  background: linear-gradient(160deg, var(--wood-light), var(--wood-mid));
+  border: 1px solid rgba(232, 220, 245, 0.1);
+}
+
+/* ===== Plantas (silhueta decorativa) ===== */
+.plant {
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+}
+
+.plant--1 { height: 42px; background: var(--leaf-1); }
+.plant--2 { height: 56px; background: var(--leaf-2); }
+
+/* ===== Utilitários de reveal (GSAP anima estado inicial via classe) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* ===== Mapa ===== */
+.map-frame {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(232, 220, 245, 0.12);
+  filter: grayscale(0.3) sepia(0.15) contrast(1.05);
+}
+
+/* ===== Footer ===== */
+footer {
+  border-top: 1px solid rgba(232, 220, 245, 0.1);
+}

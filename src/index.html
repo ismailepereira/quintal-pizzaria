@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quintal Restaurante e Pizzaria — Ouro Preto do Oeste, RO</title>
+  <meta name="description" content="Quintal Restaurante e Pizzaria: sabor de família em Ouro Preto do Oeste (RO). Pizzas, pratos e um ambiente de quintal de verdade. Confira o cardápio, o ambiente e como chegar." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Quintal Restaurante e Pizzaria" />
+  <meta property="og:description" content="Sabor de família, direto do quintal. Ouro Preto do Oeste, RO." />
+  <meta property="og:image" content="assets/img/og-cover.jpg" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23140d08' stroke='%23efe6f7' stroke-width='3'/%3E%3Ctext x='32' y='41' font-size='28' text-anchor='middle' fill='%23efe6f7' font-family='Georgia,serif'%3EQ%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind (CDN, sem build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wood: { dark: '#140d08', mid: '#241a12', light: '#362513' },
+            glow: '#efe6f7',
+            amber: '#e8b04b',
+            cream: '#f4ede4',
+            leaf: { 1: '#3d5a2e', 2: '#4a6b38' },
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body: ['"Jost"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="font-body">
+
+  <!-- ===== Nav ===== -->
+  <nav class="site-nav">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="#topo" class="flex items-center gap-3">
+        <span class="emblem text-lg">Q</span>
+        <span class="font-display text-glow text-lg tracking-wide">Quintal</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#cardapio">Cardápio</a>
+        <a href="#ambiente">Ambiente</a>
+        <a href="#localizacao">Localização</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <button id="nav-toggle" class="md:hidden text-glow" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="nav-mobile" class="md:hidden hidden flex-col gap-1 px-6 pb-4 text-sm">
+      <a href="#cardapio" class="py-2 border-b border-white/10">Cardápio</a>
+      <a href="#ambiente" class="py-2 border-b border-white/10">Ambiente</a>
+      <a href="#localizacao" class="py-2 border-b border-white/10">Localização</a>
+      <a href="#contato" class="py-2">Contato</a>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header id="topo" class="hero">
+    <!-- string lights bokeh -->
+    <span class="bokeh" style="top:14%; left:8%; width:6px; height:6px;"></span>
+    <span class="bokeh" style="top:22%; left:22%; width:5px; height:5px;"></span>
+    <span class="bokeh" style="top:10%; left:64%; width:6px; height:6px;"></span>
+    <span class="bokeh" style="top:26%; left:88%; width:5px; height:5px;"></span>
+
+    <div class="max-w-6xl mx-auto px-6 pt-32 pb-20 grid md:grid-cols-2 gap-12 items-center relative z-10">
+      <div>
+        <p class="section-label mb-4">Ouro Preto do Oeste · RO</p>
+        <h1 class="font-display text-glow text-5xl md:text-6xl leading-tight mb-6">
+          Sabor de família,<br />direto do quintal.
+        </h1>
+        <p class="text-white/70 max-w-md mb-8">
+          Pizzas artesanais, pratos caseiros e aquele clima de quintal de verdade —
+          almoço, jantar e boas conversas embaixo das luzes.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#cardapio" class="btn-amber">Ver cardápio</a>
+          <!-- confirmar número de WhatsApp -->
+          <a href="https://wa.me/556934611766" target="_blank" rel="noopener" class="btn-outline">Chamar no WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="hero-canvas-wrap mx-auto">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-fallback">
+          <span class="emblem">Q</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Cardápio ===== -->
+  <section id="cardapio" class="relative py-24 bg-wood-dark">
+    <div class="floaties">
+      <span class="floaty floaty--tomato" data-depth="0.02" style="top:18%; left:6%; width:14px; height:14px;"></span>
+      <span class="floaty floaty--lemon" data-depth="0.03" style="top:60%; left:12%; width:10px; height:10px;"></span>
+      <span class="floaty floaty--basil" data-depth="0.015" style="top:30%; right:10%; width:12px; height:12px;"></span>
+      <span class="floaty floaty--amber" data-depth="0.025" style="top:75%; right:6%; width:16px; height:16px;"></span>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+      <p class="section-label reveal">O que sai da cozinha</p>
+      <h2 class="font-display text-glow text-4xl md:text-5xl mb-12 reveal">Cardápio</h2>
+
+      <div id="menu-list" class="space-y-14">
+        <!-- preenchido via JS a partir de assets/data/menu.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Ambiente ===== -->
+  <section id="ambiente" class="relative py-24 bg-wood-mid">
+    <div class="floaties">
+      <span class="floaty floaty--tomato" data-depth="0.02" style="top:20%; left:80%; width:12px; height:12px;"></span>
+      <span class="floaty floaty--basil" data-depth="0.03" style="top:70%; left:8%; width:14px; height:14px;"></span>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+      <div class="ambiente-frame aspect-[4/3] reveal flex items-center justify-center order-2 md:order-1">
+        <span class="text-white/30 text-sm">[ foto do ambiente — placeholder ]</span>
+      </div>
+      <div class="order-1 md:order-2">
+        <p class="section-label mb-4 reveal">O clima</p>
+        <h2 class="font-display text-glow text-4xl md:text-5xl mb-6 reveal">Um quintal de verdade</h2>
+        <p class="text-white/70 mb-4 reveal">
+          Mesas ao ar livre, luzes amarelas penduradas entre as árvores e aquele clima
+          de quintal de casa de família — feito pra ficar, comer bem e não ter pressa.
+        </p>
+        <p class="text-white/70 reveal">
+          Almoço de segunda a sábado, das 11h às 14h. Jantar de terça a domingo, das 18h às 23h.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Localização ===== -->
+  <section id="localizacao" class="relative py-24 bg-wood-dark">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="section-label mb-4 reveal">Como chegar</p>
+        <h2 class="font-display text-glow text-4xl md:text-5xl mb-6 reveal">Localização</h2>
+        <!-- confirmar endereço exato -->
+        <p class="text-white/70 mb-6 reveal">Ouro Preto do Oeste — RO</p>
+        <a
+          href="https://www.google.com/maps/place/Quintal+Restaurante+e+Pizzaria/@-10.7218786,-62.2528411,17z/data=!3m1!4b1!4m6!3m5!1s0x93c97d59fdd412df:0xbb072a278e4862bb!8m2!3d-10.7218786!4d-62.2502662!16s%2Fg%2F11gdkzzmn7"
+          target="_blank" rel="noopener" class="btn-amber reveal">
+          Abrir no Google Maps
+        </a>
+      </div>
+      <div class="map-frame aspect-[4/3] reveal">
+        <iframe
+          title="Mapa — Quintal Restaurante e Pizzaria"
+          src="https://www.google.com/maps?q=-10.7218786,-62.2502662&z=16&output=embed"
+          width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contato / Rodapé ===== -->
+  <footer id="contato" class="relative py-16 bg-wood-mid">
+    <span class="plant plant--1" style="left:6%; transform:rotate(-18deg);"></span>
+    <span class="plant plant--2" style="left:9%; transform:rotate(-6deg);"></span>
+    <span class="plant plant--1" style="right:8%; transform:rotate(14deg);"></span>
+    <span class="plant plant--2" style="right:5%; transform:rotate(4deg);"></span>
+
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 relative z-10">
+      <div>
+        <span class="font-display text-glow text-2xl">Quintal</span>
+        <p class="text-white/60 text-sm mt-2">Restaurante e Pizzaria</p>
+      </div>
+      <div class="text-sm text-white/70 space-y-2">
+        <!-- confirmar telefone/whatsapp -->
+        <p><a href="tel:+556934611766">(69) 3461-1766</a></p>
+        <p><a href="https://www.instagram.com/quintal.opo/" target="_blank" rel="noopener">@quintal.opo</a></p>
+      </div>
+      <div class="text-sm text-white/70 space-y-1">
+        <p>Almoço: seg–sáb, 11h–14h</p>
+        <p>Jantar: ter–dom, 18h–23h</p>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-white/10 text-xs text-white/40 relative z-10">
+      © <span id="ano"></span> Quintal Restaurante e Pizzaria
+    </div>
+  </footer>
+
+  <!-- ===== Scripts (CDN) ===== -->
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script type="module" src="assets/js/hero-scene.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

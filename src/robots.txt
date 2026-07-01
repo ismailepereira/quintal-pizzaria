@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ismailepereira.github.io/quintal-pizzaria/sitemap.xml
