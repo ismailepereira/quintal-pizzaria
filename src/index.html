@@ -46,18 +46,22 @@
 </head>
 <body class="font-body">
 
+  <!-- textura de grão + brilho que segue o mouse (atmosfera) -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
   <!-- ===== Nav ===== -->
   <nav class="site-nav">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-      <a href="#topo" class="flex items-center gap-3">
-        <span class="emblem text-lg">Q</span>
+      <a href="#topo" class="brand flex items-center gap-3">
+        <span class="emblem emblem--sm text-base">Q</span>
         <span class="font-display text-glow text-lg tracking-wide">Quintal</span>
       </a>
       <div class="hidden md:flex items-center gap-8 text-sm">
-        <a href="#cardapio">Cardápio</a>
-        <a href="#ambiente">Ambiente</a>
-        <a href="#localizacao">Localização</a>
-        <a href="#contato">Contato</a>
+        <a href="#cardapio" class="nav-link">Cardápio</a>
+        <a href="#ambiente" class="nav-link">Ambiente</a>
+        <a href="#localizacao" class="nav-link">Localização</a>
+        <a href="#contato" class="nav-link">Contato</a>
       </div>
       <button id="nav-toggle" class="md:hidden text-glow" aria-label="Abrir menu" aria-expanded="false">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -73,35 +77,57 @@
 
   <!-- ===== Hero ===== -->
   <header id="topo" class="hero">
-    <!-- string lights bokeh -->
-    <span class="bokeh" style="top:14%; left:8%; width:6px; height:6px;"></span>
-    <span class="bokeh" style="top:22%; left:22%; width:5px; height:5px;"></span>
-    <span class="bokeh" style="top:10%; left:64%; width:6px; height:6px;"></span>
-    <span class="bokeh" style="top:26%; left:88%; width:5px; height:5px;"></span>
+    <!-- fio de luzes no topo -->
+    <svg class="string-lights" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
+      <path class="wire" d="M0,14 C150,54 300,54 450,20 S750,54 900,20 1050,50 1200,16" />
+      <circle class="bulb" cx="90"   cy="41" r="3.5" />
+      <circle class="bulb" cx="215"  cy="49" r="3.5" />
+      <circle class="bulb" cx="345"  cy="42" r="3.5" />
+      <circle class="bulb" cx="470"  cy="24" r="3.5" />
+      <circle class="bulb" cx="600"  cy="44" r="3.5" />
+      <circle class="bulb" cx="730"  cy="46" r="3.5" />
+      <circle class="bulb" cx="860"  cy="30" r="3.5" />
+      <circle class="bulb" cx="985"  cy="34" r="3.5" />
+      <circle class="bulb" cx="1110" cy="40" r="3.5" />
+    </svg>
 
-    <div class="max-w-6xl mx-auto px-6 pt-32 pb-20 grid md:grid-cols-2 gap-12 items-center relative z-10">
+    <!-- string lights bokeh -->
+    <span class="bokeh" style="top:16%; left:10%; width:6px; height:6px;"></span>
+    <span class="bokeh" style="top:24%; left:24%; width:5px; height:5px;"></span>
+    <span class="bokeh" style="top:12%; left:66%; width:6px; height:6px;"></span>
+    <span class="bokeh" style="top:28%; left:86%; width:5px; height:5px;"></span>
+
+    <div class="max-w-6xl mx-auto px-6 pt-32 pb-24 grid md:grid-cols-2 gap-12 items-center relative z-10">
       <div>
-        <p class="section-label mb-4">Ouro Preto do Oeste · RO</p>
-        <h1 class="font-display text-glow text-5xl md:text-6xl leading-tight mb-6">
-          Sabor de família,<br />direto do quintal.
+        <p class="hero-eyebrow section-label mb-5" data-intro>
+          <span class="rule"></span> Ouro Preto do Oeste · RO
+        </p>
+        <h1 class="hero-title text-glow font-display">
+          <span class="line"><span data-intro>Sabor de família,</span></span>
+          <span class="line"><span data-intro>direto do <em>quintal.</em></span></span>
         </h1>
-        <p class="text-white/70 max-w-md mb-8">
+        <p class="hero-lede" data-intro>
           Pizzas artesanais, pratos caseiros e aquele clima de quintal de verdade —
           almoço, jantar e boas conversas embaixo das luzes.
         </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="#cardapio" class="btn-amber">Ver cardápio</a>
+        <div class="hero-cta flex flex-wrap gap-4" data-intro>
+          <a href="#cardapio" class="btn-amber" data-magnetic>Ver cardápio</a>
           <!-- confirmar número de WhatsApp -->
-          <a href="https://wa.me/556934611766" target="_blank" rel="noopener" class="btn-outline">Chamar no WhatsApp</a>
+          <a href="https://wa.me/556934611766" target="_blank" rel="noopener" class="btn-outline" data-magnetic>Chamar no WhatsApp</a>
         </div>
       </div>
 
-      <div class="hero-canvas-wrap mx-auto">
+      <div class="hero-canvas-wrap mx-auto" data-intro-canvas>
         <canvas id="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-fallback">
           <span class="emblem">Q</span>
         </div>
       </div>
+    </div>
+
+    <div class="scroll-cue" data-intro>
+      <span>rolar</span>
+      <span class="track"></span>
     </div>
   </header>
 
@@ -115,10 +141,10 @@
     </div>
 
     <div class="max-w-5xl mx-auto px-6 relative z-10">
-      <p class="section-label reveal">O que sai da cozinha</p>
-      <h2 class="font-display text-glow text-4xl md:text-5xl mb-12 reveal">Cardápio</h2>
+      <p class="section-label reveal"><span class="idx">01</span> O que sai da cozinha</p>
+      <h2 class="section-title font-display text-glow mt-3 mb-12 reveal">Cardápio</h2>
 
-      <div id="menu-list" class="space-y-14">
+      <div id="menu-list" class="space-y-16">
         <!-- preenchido via JS a partir de assets/data/menu.json -->
       </div>
     </div>
@@ -132,17 +158,32 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-      <div class="ambiente-frame aspect-[4/3] reveal flex items-center justify-center order-2 md:order-1">
-        <span class="text-white/30 text-sm">[ foto do ambiente — placeholder ]</span>
+      <!-- cena noturna composta (placeholder ilustrado; trocar por foto real depois) -->
+      <div class="ambiente-scene aspect-[4/3] reveal order-2 md:order-1">
+        <div class="sky-glow"></div>
+        <svg class="amb-wire" viewBox="0 0 600 210" preserveAspectRatio="none" aria-hidden="true">
+          <path class="wire" d="M0,20 C120,80 240,80 360,30 S540,80 600,26" />
+          <circle class="bulb" cx="70"  cy="55" r="4" />
+          <circle class="bulb" cx="160" cy="70" r="4" />
+          <circle class="bulb" cx="250" cy="58" r="4" />
+          <circle class="bulb" cx="345" cy="34" r="4" />
+          <circle class="bulb" cx="440" cy="55" r="4" />
+          <circle class="bulb" cx="530" cy="52" r="4" />
+        </svg>
+        <span class="frond" style="left:12%; transform:rotate(-8deg);"></span>
+        <span class="frond" style="right:12%; transform:rotate(8deg);"></span>
+        <span class="table"></span>
+        <span class="candle"></span>
+        <span class="floor"></span>
       </div>
       <div class="order-1 md:order-2">
-        <p class="section-label mb-4 reveal">O clima</p>
-        <h2 class="font-display text-glow text-4xl md:text-5xl mb-6 reveal">Um quintal de verdade</h2>
-        <p class="text-white/70 mb-4 reveal">
+        <p class="section-label mb-4 reveal"><span class="idx">02</span> O clima</p>
+        <h2 class="section-title font-display text-glow mb-6 reveal">Um quintal de verdade</h2>
+        <p class="hero-lede reveal" style="max-width:none;">
           Mesas ao ar livre, luzes amarelas penduradas entre as árvores e aquele clima
           de quintal de casa de família — feito pra ficar, comer bem e não ter pressa.
         </p>
-        <p class="text-white/70 reveal">
+        <p class="reveal" style="color:rgba(244,237,228,0.6); line-height:1.6;">
           Almoço de segunda a sábado, das 11h às 14h. Jantar de terça a domingo, das 18h às 23h.
         </p>
       </div>
@@ -153,8 +194,8 @@
   <section id="localizacao" class="relative py-24 bg-wood-dark">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <p class="section-label mb-4 reveal">Como chegar</p>
-        <h2 class="font-display text-glow text-4xl md:text-5xl mb-6 reveal">Localização</h2>
+        <p class="section-label mb-4 reveal"><span class="idx">03</span> Como chegar</p>
+        <h2 class="section-title font-display text-glow mb-6 reveal">Localização</h2>
         <!-- confirmar endereço exato -->
         <p class="text-white/70 mb-6 reveal">Ouro Preto do Oeste — RO</p>
         <a
