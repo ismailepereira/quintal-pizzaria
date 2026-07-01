@@ -1,11 +1,14 @@
-/* Interações: intro orquestrada, nav (scrolled/active), cursor glow, botões
-   magnéticos, reveals em scroll, parallax dos pontinhos e cardápio (menu.json). */
+/* Interações com Motion (motion.dev — lib vanilla da equipe do Framer Motion):
+   intro orquestrada com spring, reveals em scroll (inView), nav (scrolled/active),
+   cursor glow, botões magnéticos e cardápio (menu.json). */
+import { animate, inView, stagger } from "motion";
+
+window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion carregou
+
 (function () {
   document.getElementById("ano").textContent = new Date().getFullYear();
-
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hasGSAP = !!(window.gsap && window.ScrollTrigger);
-  if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
+  var EASE = [0.22, 1, 0.36, 1];
 
   /* ---- menu mobile ---- */
   var navToggle = document.getElementById("nav-toggle");
@@ -27,23 +30,20 @@
 
   /* ---- nav: estado "scrolled" ---- */
   var nav = document.querySelector(".site-nav");
-  function onScroll() {
-    if (nav) nav.classList.toggle("scrolled", window.scrollY > 10);
-  }
+  function onScroll() { if (nav) nav.classList.toggle("scrolled", window.scrollY > 10); }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---- cursor glow (brilho que segue o mouse) ---- */
+  /* ---- cursor glow ---- */
   var glow = document.querySelector(".cursor-glow");
   if (glow && window.matchMedia("(hover: hover)").matches && !reduceMotion) {
-    var gx = window.innerWidth / 2, gy = window.innerHeight / 2, cx = gx, cy = gy;
+    var gx = innerWidth / 2, gy = innerHeight / 2, cx = gx, cy = gy;
     document.body.classList.add("cursor-on");
-    window.addEventListener("mousemove", function (e) { gx = e.clientX; gy = e.clientY; });
-    (function follow() {
-      cx += (gx - cx) * 0.12;
-      cy += (gy - cy) * 0.12;
+    addEventListener("mousemove", function (e) { gx = e.clientX; gy = e.clientY; });
+    (function loop() {
+      cx += (gx - cx) * 0.12; cy += (gy - cy) * 0.12;
       glow.style.transform = "translate3d(" + cx + "px," + cy + "px,0) translate(-50%,-50%)";
-      requestAnimationFrame(follow);
+      requestAnimationFrame(loop);
     })();
   }
 
@@ -52,87 +52,64 @@
     document.querySelectorAll("[data-magnetic]").forEach(function (el) {
       el.addEventListener("mousemove", function (e) {
         var r = el.getBoundingClientRect();
-        var mx = e.clientX - r.left - r.width / 2;
-        var my = e.clientY - r.top - r.height / 2;
+        var mx = e.clientX - r.left - r.width / 2, my = e.clientY - r.top - r.height / 2;
         el.style.transform = "translate(" + mx * 0.25 + "px," + my * 0.35 + "px)";
       });
       el.addEventListener("mouseleave", function () { el.style.transform = ""; });
     });
   }
 
-  /* ---- intro orquestrada do hero ---- */
-  // Rede de segurança: garante o conteúdo visível mesmo se GSAP/rAF não rodar.
-  function forceShowIntro() {
-    document.querySelectorAll("[data-intro]").forEach(function (el) {
-      el.style.opacity = 1;
-      el.style.transform = "none";
-    });
-    document.querySelectorAll(".hero-title .line > span[data-intro]").forEach(function (el) {
-      el.style.transform = "translateY(0)";
-    });
-    var wrapEl = document.querySelector("[data-intro-canvas]");
-    if (wrapEl) { wrapEl.style.opacity = 1; wrapEl.style.transform = "none"; }
+  /* ---- rede de segurança: garante conteúdo visível ---- */
+  function forceShow(sel) {
+    document.querySelectorAll(sel).forEach(function (el) { el.style.opacity = 1; el.style.transform = "none"; });
+    document.querySelectorAll(".hero-title .line > span[data-intro]").forEach(function (el) { el.style.transform = "translateY(0)"; });
+    var w = document.querySelector("[data-intro-canvas]");
+    if (w) { w.style.opacity = 1; w.style.transform = "none"; }
   }
 
+  /* ---- intro orquestrada (Motion + spring) ---- */
   function runIntro() {
-    if (!hasGSAP || reduceMotion) { forceShowIntro(); return; }
-
-    var tl = gsap.timeline({ defaults: { ease: "power3.out" }, onComplete: forceShowIntro });
-    tl.from(".site-nav", { y: -30, opacity: 0, duration: 0.7 })
-      .fromTo(".hero-eyebrow[data-intro]", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.2")
-      .fromTo(".hero-title .line > span[data-intro]", { yPercent: 110, y: 0 }, { yPercent: 0, y: 0, duration: 1, stagger: 0.12 }, "-=0.35")
-      .fromTo(".hero-lede[data-intro]", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7 }, "-=0.6")
-      .fromTo(".hero-cta[data-intro]", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7 }, "-=0.45")
-      .fromTo("[data-intro-canvas]", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" }, "-=1.1")
-      .fromTo(".scroll-cue[data-intro]", { opacity: 0 }, { opacity: 1, duration: 0.6 }, "-=0.3");
-
-    // se o rAF estiver bloqueado (aba não pintada, etc.), revela mesmo assim
-    setTimeout(function () {
-      if (!tl.progress()) forceShowIntro();
-    }, 4200);
+    if (reduceMotion) { forceShow("[data-intro]"); return; }
+    try {
+      animate(".hero-eyebrow[data-intro]", { opacity: [0, 1], y: [12, 0] }, { duration: 0.6, delay: 0.15, easing: EASE });
+      animate(".hero-title .line > span[data-intro]", { y: ["110%", "0%"] },
+        { duration: 0.9, delay: stagger(0.12, { start: 0.35 }), easing: EASE });
+      animate(".hero-lede[data-intro]", { opacity: [0, 1], y: [18, 0] }, { duration: 0.7, delay: 0.7, easing: EASE });
+      animate(".hero-cta[data-intro]", { opacity: [0, 1], y: [18, 0] }, { duration: 0.7, delay: 0.9, easing: EASE });
+      animate("[data-intro-canvas]", { opacity: [0, 1], scale: [0.9, 1] },
+        { type: "spring", stiffness: 60, damping: 14, delay: 0.35 });
+      animate(".scroll-cue[data-intro]", { opacity: [0, 1] }, { duration: 0.6, delay: 1.5 });
+      setTimeout(function () { forceShow("[data-intro]"); }, 3200); // garante estado final
+    } catch (e) { forceShow("[data-intro]"); }
   }
   runIntro();
 
-  /* ---- reveals em scroll ---- */
-  function bindReveals(nodes) {
-    if (hasGSAP && !reduceMotion) {
-      nodes.forEach(function (el, i) {
-        gsap.to(el, {
-          opacity: 1, y: 0, duration: 0.85, ease: "power2.out",
-          delay: (i % 6) * 0.06,
-          scrollTrigger: { trigger: el, start: "top 86%" },
-        });
-      });
-    } else {
-      nodes.forEach(function (el) { el.style.opacity = 1; el.style.transform = "none"; });
-    }
+  /* ---- reveals em scroll (inView) ---- */
+  function reveal(el) {
+    if (reduceMotion) { el.style.opacity = 1; el.style.transform = "none"; return; }
+    inView(el, function () {
+      animate(el, { opacity: [0, 1], y: [30, 0] }, { duration: 0.85, easing: EASE });
+    }, { amount: 0.15 });
   }
-  bindReveals(Array.prototype.slice.call(document.querySelectorAll(".reveal")));
+  document.querySelectorAll(".reveal").forEach(reveal);
 
   /* ---- nav active link por seção ---- */
-  if (hasGSAP && !reduceMotion) {
-    ["cardapio", "ambiente", "localizacao", "contato"].forEach(function (id) {
-      var sec = document.getElementById(id);
-      var link = document.querySelector('.nav-link[href="#' + id + '"]');
-      if (!sec || !link) return;
-      ScrollTrigger.create({
-        trigger: sec, start: "top 55%", end: "bottom 55%",
-        onToggle: function (self) {
-          if (self.isActive) {
-            document.querySelectorAll(".nav-link").forEach(function (l) { l.classList.remove("active"); });
-            link.classList.add("active");
-          }
-        },
-      });
-    });
-  }
+  ["cardapio", "ambiente", "localizacao", "contato"].forEach(function (id) {
+    var sec = document.getElementById(id);
+    var link = document.querySelector('.nav-link[href="#' + id + '"]');
+    if (!sec || !link) return;
+    inView(sec, function () {
+      document.querySelectorAll(".nav-link").forEach(function (l) { l.classList.remove("active"); });
+      link.classList.add("active");
+      return function () {};
+    }, { amount: 0.5 });
+  });
 
-  /* ---- parallax sutil dos pontinhos flutuantes ---- */
+  /* ---- parallax dos pontinhos flutuantes ---- */
   if (!reduceMotion) {
     var floaties = document.querySelectorAll(".floaty");
-    window.addEventListener("mousemove", function (e) {
-      var cxp = e.clientX / window.innerWidth - 0.5;
-      var cyp = e.clientY / window.innerHeight - 0.5;
+    addEventListener("mousemove", function (e) {
+      var cxp = e.clientX / innerWidth - 0.5, cyp = e.clientY / innerHeight - 0.5;
       floaties.forEach(function (el) {
         var depth = parseFloat(el.dataset.depth || "0.02") * 100;
         el.style.transform = "translate(" + cxp * depth + "px," + cyp * depth + "px)";
@@ -146,10 +123,8 @@
     .then(function (categorias) {
       var container = document.getElementById("menu-list");
       if (!container) return;
-
       categorias.forEach(function (cat) {
         var section = document.createElement("div");
-
         var title = document.createElement("h3");
         title.className = "font-display text-glow text-3xl mb-6 reveal";
         title.textContent = cat.categoria;
@@ -157,7 +132,6 @@
 
         var grid = document.createElement("div");
         grid.className = "grid sm:grid-cols-2 gap-4";
-
         cat.itens.forEach(function (item) {
           var card = document.createElement("div");
           card.className = "menu-card reveal";
@@ -170,13 +144,10 @@
             '<p class="desc">' + item.descricao + '</p>';
           grid.appendChild(card);
         });
-
         section.appendChild(grid);
         container.appendChild(section);
       });
-
-      bindReveals(Array.prototype.slice.call(document.querySelectorAll("#menu-list .reveal")));
-      if (hasGSAP) ScrollTrigger.refresh();
+      document.querySelectorAll("#menu-list .reveal").forEach(reveal);
     })
     .catch(function (err) { console.error("Falha ao carregar cardápio:", err); });
 })();
