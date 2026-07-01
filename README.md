@@ -50,10 +50,11 @@ Títulos: *Cormorant Garamond* · Texto/UI: *Jost*
 - [ ] Domínio próprio (atualizar URLs canônicas/OG ao migrar)
 
 ## Créditos / licenças de terceiros
-- Modelo 3D da pizza do hero: **"Pepperoni pizza"** por *Poly by Google* — licença
-  **CC-BY** (Creative Commons Attribution). Fonte: https://poly.pizza/m/9IWGn64Fnqo
-  Arquivo auto-hospedado em `src/assets/models/pizza.glb`.
-- Bibliotecas via CDN: Three.js, Motion (motion.dev), Tailwind.
+- Foto da pizza do hero: **Unsplash** (licença Unsplash — uso comercial livre, sem
+  atribuição obrigatória). Auto-hospedada em `src/assets/img/pizza-hero.jpg` —
+  substituir por foto real do Quintal quando disponível.
+- Bibliotecas via CDN: Motion (motion.dev), Tailwind.
+- Tipografia: Playfair Display + Karla (Google Fonts).
 
 ---
 Desenvolvido por [ismailepereira](https://ismailepereira.github.io/)

@@ -18,7 +18,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind (CDN, sem build) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -34,8 +34,8 @@
             leaf: { 1: '#3d5a2e', 2: '#4a6b38' },
           },
           fontFamily: {
-            display: ['"Cormorant Garamond"', 'serif'],
-            body: ['"Jost"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif'],
+            body: ['"Karla"', 'sans-serif'],
           },
         },
       },
@@ -117,11 +117,16 @@
         </div>
       </div>
 
-      <div class="hero-canvas-wrap mx-auto" data-intro-canvas>
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
-        <div class="hero-fallback">
-          <span class="emblem">Q</span>
+      <div class="hero-stage mx-auto" data-intro-canvas>
+        <span class="stage-halo" aria-hidden="true"></span>
+        <div class="pizza-disc">
+          <img src="assets/img/pizza-hero.jpg" alt="Pizza artesanal assada na hora no Quintal" />
         </div>
+        <span class="pizza-ring" aria-hidden="true"></span>
+        <span class="ingredient i-tomato" aria-hidden="true"></span>
+        <span class="ingredient i-basil" aria-hidden="true"></span>
+        <span class="ingredient i-lemon" aria-hidden="true"></span>
+        <span class="ingredient i-olive" aria-hidden="true"></span>
       </div>
     </div>
 
@@ -236,24 +241,16 @@
         <p>Jantar: ter–dom, 18h–23h</p>
       </div>
     </div>
-    <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-white/10 text-xs text-white/40 relative z-10 flex flex-wrap gap-x-4 gap-y-1 justify-between">
-      <span>© <span id="ano"></span> Quintal Restaurante e Pizzaria</span>
-      <span class="text-white/25">Modelo 3D “Pepperoni pizza” por Poly by Google (CC-BY)</span>
+    <div class="max-w-6xl mx-auto px-6 mt-10 pt-6 border-t border-white/10 text-xs text-white/40 relative z-10">
+      © <span id="ano"></span> Quintal Restaurante e Pizzaria
     </div>
   </footer>
 
   <!-- ===== Scripts (CDN, sem build) ===== -->
   <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
-        "motion": "https://cdn.jsdelivr.net/npm/motion@11/+esm"
-      }
-    }
+    { "imports": { "motion": "https://cdn.jsdelivr.net/npm/motion@11/+esm" } }
   </script>
 
-  <script type="module" src="assets/js/hero-scene.js"></script>
   <script type="module" src="assets/js/main.js"></script>
 
   <!-- Rede de segurança: se as animações não rodarem (CDN/JS off), revela tudo -->
