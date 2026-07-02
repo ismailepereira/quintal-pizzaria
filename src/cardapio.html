@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardápio e pedidos — Quintal Restaurante e Pizzaria</title>
+  <meta name="description" content="Cardápio do Quintal Restaurante e Pizzaria: monte seu pedido, escolha o tamanho (Grande, Média, Pequena), pizza inteira ou meio a meio, e envie direto pelo WhatsApp." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%230c0a09' stroke='%23f5efe6' stroke-width='3'/%3E%3Ctext x='32' y='42' font-size='30' text-anchor='middle' fill='%23f5efe6' font-family='Georgia,serif'%3EQ%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;0,800;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ===== Nav ===== -->
+  <nav class="site-nav scrolled">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Quintal — início">
+        <img src="assets/logo/quintal-branca.png" alt="Quintal Restaurante e Pizzaria" />
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Início</a>
+        <a href="cardapio.html" class="nav-link active">Cardápio</a>
+        <a href="index.html#localizacao" class="nav-link">Localização</a>
+        <button class="btn btn-wine" id="nav-cart">Ver pedido</button>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="nav-mobile">
+      <a href="index.html">Início</a>
+      <a href="cardapio.html">Cardápio</a>
+      <a href="index.html#localizacao">Localização</a>
+      <a href="index.html#contato">Contato</a>
+    </div>
+  </nav>
+
+  <!-- ===== Cabeçalho ===== -->
+  <header class="page-head wrap">
+    <p class="eyebrow"><span class="rule"></span> Monte seu pedido</p>
+    <h1 class="font-display">Nosso cardápio</h1>
+    <p class="lead">Escolha o tamanho, monte pizza inteira ou <strong>meio a meio</strong> e finalize pelo WhatsApp.
+      Grande (12 fatias, até 4 sabores) · Média (8, até 3) · Pequena (6, até 2).</p>
+  </header>
+
+  <!-- ===== Lista do cardápio (render via JS) ===== -->
+  <main class="wrap" style="padding-bottom:5rem;">
+    <div id="menu-list"></div>
+    <p id="menu-loading" class="lead" style="margin-top:2rem;">Carregando cardápio…</p>
+  </main>
+
+  <!-- ===== Botão flutuante do carrinho ===== -->
+  <button class="cart-fab" id="cart-fab" hidden aria-label="Abrir pedido">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6 5 3H2"/></svg>
+    <span>Pedido</span>
+    <span class="count" id="cart-count">0</span>
+  </button>
+
+  <!-- ===== Backdrop + Gaveta ===== -->
+  <div class="backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-label="Seu pedido">
+    <div class="drawer-head">
+      <h2 id="drawer-title">Seu pedido</h2>
+      <button class="drawer-close" id="drawer-close" aria-label="Fechar">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+    <div class="drawer-foot" id="drawer-foot"></div>
+  </aside>
+
+  <!-- ===== Modal (config da pizza) ===== -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-card" id="modal-card"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ===== Rodapé ===== -->
+  <footer id="contato">
+    <div class="wrap foot-grid">
+      <div class="foot-logo">
+        <img src="assets/logo/quintal-branca.png" alt="Quintal Restaurante e Pizzaria" />
+        <p style="color:var(--ink-dim); font-size:0.88rem; max-width:22rem;">Pizza artesanal e clima de quintal de verdade, em Ouro Preto do Oeste (RO).</p>
+      </div>
+      <div>
+        <p class="foot-h">Contato</p>
+        <!-- confirmar telefone/whatsapp -->
+        <p><a href="tel:+556934611766">(69) 3461-1766</a></p>
+        <p><a href="https://wa.me/556934611766" target="_blank" rel="noopener">WhatsApp</a></p>
+        <p><a href="https://www.instagram.com/quintal.opo/" target="_blank" rel="noopener">@quintal.opo</a></p>
+      </div>
+      <div>
+        <p class="foot-h">Horários</p>
+        <p style="color:var(--ink-dim);">Almoço: seg–sáb, 11h–14h</p>
+        <p style="color:var(--ink-dim);">Jantar: ter–dom, 18h–23h</p>
+      </div>
+    </div>
+    <div class="wrap foot-bottom">
+      <span>© <span id="ano"></span> Quintal Restaurante e Pizzaria</span>
+      <span>Ouro Preto do Oeste · RO</span>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script src="assets/js/cardapio.js" defer></script>
+</body>
+</html>

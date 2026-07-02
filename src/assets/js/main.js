@@ -85,7 +85,7 @@ window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion
   document.querySelectorAll(".reveal").forEach(reveal);
 
   /* ---- nav active link por seção ---- */
-  ["cardapio", "sobre", "localizacao"].forEach(function (id) {
+  ["sobre", "localizacao"].forEach(function (id) {
     var sec = document.getElementById(id);
     var link = document.querySelector('.nav-link[href="#' + id + '"]');
     if (!sec || !link) return;
@@ -108,38 +108,4 @@ window.__motionOK = true; // sinaliza pra rede de segurança inline que o Motion
     });
   }
 
-  /* ---- cardápio a partir de menu.json ---- */
-  fetch("assets/data/menu.json")
-    .then(function (r) { return r.json(); })
-    .then(function (categorias) {
-      var container = document.getElementById("menu-list");
-      if (!container) return;
-      categorias.forEach(function (cat) {
-        var section = document.createElement("div");
-        section.className = "menu-cat";
-        var title = document.createElement("h3");
-        title.className = "reveal";
-        title.textContent = cat.categoria;
-        section.appendChild(title);
-
-        var grid = document.createElement("div");
-        grid.className = "menu-grid";
-        cat.itens.forEach(function (item) {
-          var it = document.createElement("div");
-          it.className = "menu-item reveal";
-          it.innerHTML =
-            '<div class="row">' +
-              '<span class="nome">' + item.nome + '</span>' +
-              '<span class="leader"></span>' +
-              '<span class="preco">R$ ' + item.preco + '</span>' +
-            '</div>' +
-            '<p class="desc">' + item.descricao + '</p>';
-          grid.appendChild(it);
-        });
-        section.appendChild(grid);
-        container.appendChild(section);
-      });
-      document.querySelectorAll("#menu-list .reveal").forEach(reveal);
-    })
-    .catch(function (err) { console.error("Falha ao carregar cardápio:", err); });
 })();

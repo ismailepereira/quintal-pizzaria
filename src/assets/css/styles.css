@@ -213,3 +213,122 @@ footer a:hover { color: var(--amber); }
   .sobre-photo { order: -1; }
   .foot-grid { grid-template-columns: 1fr; }
 }
+
+/* =========================================================================
+   Cardápio (página dedicada) + carrinho + checkout via WhatsApp
+   ========================================================================= */
+.page-head { padding: 8.5rem 0 2rem; }
+.page-head .eyebrow { margin-bottom: 0.8rem; }
+.page-head h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); }
+.page-head .lead { color: var(--ink-dim); max-width: 40rem; margin-top: 0.8rem; }
+
+.menu-cat { margin-top: 3rem; }
+.menu-cat > h3 { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--font-display); font-size: 1.9rem; }
+.menu-cat > h3::before { content: ""; width: 1.6rem; height: 2px; background: var(--wine-2); display: inline-block; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 0 2.5rem; margin-top: 1rem; }
+
+/* item do cardápio com ação de adicionar */
+.mi { display: flex; gap: 1rem; justify-content: space-between; align-items: flex-start;
+  padding: 1.1rem 0; border-bottom: 1px solid rgba(245, 239, 230, 0.08); }
+.mi .info { min-width: 0; }
+.mi .nome { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; }
+.mi .desc { color: var(--ink-dim); font-size: 0.85rem; margin-top: 0.2rem; }
+.mi .price { color: var(--amber); font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; margin-top: 0.35rem; }
+.mi .add { flex-shrink: 0; }
+.btn-add { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+  background: transparent; border: 1px solid var(--wine-2); color: var(--ink);
+  font-family: var(--font-body); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em;
+  padding: 0.55rem 1.1rem; border-radius: 2px; transition: background 0.25s ease, border-color 0.25s ease; }
+.btn-add:hover { background: var(--wine); border-color: var(--wine); }
+
+/* botão flutuante do carrinho */
+.cart-fab { position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 60;
+  display: inline-flex; align-items: center; gap: 0.6rem; cursor: pointer;
+  background: var(--wine); color: var(--ink); border: 0; border-radius: 999px;
+  padding: 0.9rem 1.35rem; font-family: var(--font-body); font-weight: 600; font-size: 0.9rem;
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.7); transition: transform 0.25s var(--ease), background 0.25s ease; }
+.cart-fab:hover { transform: translateY(-2px); background: var(--wine-2); }
+.cart-fab .count { min-width: 1.4rem; height: 1.4rem; padding: 0 0.35rem; border-radius: 999px;
+  background: var(--amber); color: #201400; font-weight: 700; font-size: 0.78rem;
+  display: inline-flex; align-items: center; justify-content: center; }
+.cart-fab[hidden] { display: none; }
+
+/* backdrop */
+.backdrop { position: fixed; inset: 0; z-index: 70; background: rgba(6, 4, 3, 0.62);
+  opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+.backdrop.show { opacity: 1; visibility: visible; }
+
+/* gaveta do carrinho */
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 80;
+  width: min(420px, 92vw); background: var(--panel); border-left: 1px solid rgba(245, 239, 230, 0.1);
+  transform: translateX(100%); transition: transform 0.35s var(--ease);
+  display: flex; flex-direction: column; }
+.drawer.open { transform: translateX(0); }
+.drawer-head { display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 1.4rem 1rem; border-bottom: 1px solid rgba(245, 239, 230, 0.1); }
+.drawer-head h2 { font-family: var(--font-display); font-size: 1.5rem; }
+.drawer-close { background: none; border: 0; color: var(--ink-dim); cursor: pointer; padding: 0.3rem; font-size: 1.1rem; }
+.drawer-close:hover { color: var(--ink); }
+.drawer-body { flex: 1; overflow-y: auto; padding: 1rem 1.4rem; }
+.drawer-foot { padding: 1.1rem 1.4rem 1.4rem; border-top: 1px solid rgba(245, 239, 230, 0.1); }
+.drawer-empty { color: var(--ink-dim); text-align: center; padding: 3rem 1rem; }
+
+.cart-line { display: flex; gap: 0.8rem; padding: 0.9rem 0; border-bottom: 1px solid rgba(245, 239, 230, 0.08); }
+.cart-line .cl-main { flex: 1; min-width: 0; }
+.cart-line .cl-nome { font-weight: 600; font-size: 0.95rem; }
+.cart-line .cl-meta { color: var(--ink-dim); font-size: 0.78rem; margin-top: 0.15rem; }
+.cart-line .cl-price { color: var(--amber); font-family: var(--font-display); font-weight: 700; white-space: nowrap; }
+.cart-line .cl-remove { background: none; border: 0; color: var(--ink-faint); cursor: pointer; font-size: 0.75rem; margin-top: 0.3rem; padding: 0; }
+.cart-line .cl-remove:hover { color: var(--wine-2); }
+
+.qty { display: inline-flex; align-items: center; border: 1px solid rgba(245, 239, 230, 0.18); border-radius: 3px; margin-top: 0.4rem; }
+.qty button { width: 1.7rem; height: 1.7rem; background: none; border: 0; color: var(--ink); cursor: pointer; font-size: 1rem; line-height: 1; }
+.qty button:hover { color: var(--amber); }
+.qty span { min-width: 1.8rem; text-align: center; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+
+.summary-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.9rem; }
+.summary-row .lbl { color: var(--ink-dim); font-size: 0.9rem; }
+.summary-row .val { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--ink); }
+.btn-block { width: 100%; justify-content: center; }
+
+/* modal (config da pizza) */
+.modal { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center;
+  padding: 1.2rem; background: rgba(6, 4, 3, 0.62);
+  opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+.modal.show { opacity: 1; visibility: visible; }
+.modal-card { position: relative; z-index: 2; width: min(460px, 100%); max-height: 88vh; overflow-y: auto;
+  background: var(--panel); border: 1px solid rgba(245, 239, 230, 0.12); border-top: 3px solid var(--wine);
+  border-radius: 0 0 6px 6px; padding: 1.5rem; transform: translateY(16px); transition: transform 0.3s var(--ease); }
+.modal.show .modal-card { transform: translateY(0); }
+.modal-card h3 { font-family: var(--font-display); font-size: 1.6rem; }
+.modal-card .m-desc { color: var(--ink-dim); font-size: 0.85rem; margin-top: 0.2rem; }
+.field-label { display: block; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.68rem;
+  color: var(--amber); font-weight: 600; margin: 1.4rem 0 0.6rem; }
+.opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.opts.two { grid-template-columns: repeat(2, 1fr); }
+.opt { cursor: pointer; border: 1px solid rgba(245, 239, 230, 0.16); border-radius: 3px; padding: 0.7rem 0.5rem;
+  text-align: center; background: transparent; color: var(--ink); font-family: var(--font-body); transition: 0.2s; font-size: 0.9rem; }
+.opt small { display: block; color: var(--ink-dim); font-size: 0.72rem; margin-top: 0.15rem; }
+.opt.sel { border-color: var(--amber); background: rgba(232, 176, 75, 0.08); }
+.opt.sel small { color: var(--amber); }
+.opt:hover { border-color: rgba(245, 239, 230, 0.4); }
+
+select, input, textarea { width: 100%; background: var(--bg); color: var(--ink);
+  border: 1px solid rgba(245, 239, 230, 0.18); border-radius: 3px; padding: 0.7rem 0.8rem;
+  font-family: var(--font-body); font-size: 0.95rem; }
+select:focus, input:focus, textarea:focus { outline: 0; border-color: var(--amber); box-shadow: 0 0 0 2px rgba(232, 176, 75, 0.2); }
+textarea { resize: vertical; min-height: 3.5rem; }
+.field { margin-top: 1rem; }
+.field > label { display: block; font-size: 0.82rem; color: var(--ink-dim); margin-bottom: 0.35rem; }
+
+.modal-price { display: flex; align-items: baseline; justify-content: space-between; margin: 1.5rem 0 1rem; }
+.modal-price .mp-val { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--amber); }
+.modal-actions { display: flex; gap: 0.7rem; align-items: center; }
+.hint { color: var(--ink-faint); font-size: 0.78rem; margin-top: 0.4rem; }
+
+.toast { position: fixed; left: 50%; bottom: 5.5rem; transform: translateX(-50%) translateY(20px); z-index: 95;
+  background: var(--amber); color: #201400; font-weight: 600; font-size: 0.88rem; padding: 0.7rem 1.2rem;
+  border-radius: 3px; opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 10px 30px -8px rgba(0,0,0,0.6); }
+.toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 640px) { .menu-grid { grid-template-columns: 1fr; } }

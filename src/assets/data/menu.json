@@ -1,27 +1,30 @@
 [
   {
-    "categoria": "Pizzas",
+    "categoria": "Pizzas Salgadas",
+    "tipo": "pizza",
     "itens": [
-      { "nome": "Margherita", "descricao": "molho de tomate, mussarela, manjericão fresco", "preco": "45,00" },
-      { "nome": "Calabresa", "descricao": "calabresa fatiada, cebola roxa, azeitona", "preco": "48,00" },
-      { "nome": "Quatro Queijos", "descricao": "mussarela, provolone, gorgonzola, parmesão", "preco": "52,00" },
-      { "nome": "Portuguesa", "descricao": "presunto, ovos, cebola, pimentão, azeitona", "preco": "50,00" },
-      { "nome": "Frango com Catupiry", "descricao": "frango desfiado, catupiry, milho", "preco": "49,00" }
+      { "nome": "Margherita", "descricao": "molho de tomate, mussarela, manjericão fresco", "precos": { "grande": 45, "media": 38, "pequena": 30 } },
+      { "nome": "Calabresa", "descricao": "calabresa fatiada, cebola roxa, azeitona", "precos": { "grande": 48, "media": 40, "pequena": 32 } },
+      { "nome": "Quatro Queijos", "descricao": "mussarela, provolone, gorgonzola, parmesão", "precos": { "grande": 52, "media": 44, "pequena": 36 } },
+      { "nome": "Portuguesa", "descricao": "presunto, ovos, cebola, pimentão, azeitona", "precos": { "grande": 50, "media": 42, "pequena": 34 } },
+      { "nome": "Frango com Catupiry", "descricao": "frango desfiado, catupiry, milho", "precos": { "grande": 49, "media": 41, "pequena": 33 } }
+    ]
+  },
+  {
+    "categoria": "Pizzas Doces",
+    "tipo": "pizza",
+    "itens": [
+      { "nome": "Chocolate com Morango", "descricao": "chocolate ao leite e morangos", "precos": { "grande": 44, "media": 37, "pequena": 30 } },
+      { "nome": "Chocolate Branco com M&M", "descricao": "chocolate branco e confetes", "precos": { "grande": 46, "media": 39, "pequena": 32 } }
     ]
   },
   {
     "categoria": "Bebidas",
+    "tipo": "simples",
     "itens": [
-      { "nome": "Suco natural", "descricao": "sabores da estação", "preco": "12,00" },
-      { "nome": "Refrigerante lata", "descricao": "diversos sabores", "preco": "8,00" },
-      { "nome": "Cerveja artesanal", "descricao": "long neck, rótulos selecionados", "preco": "18,00" }
-    ]
-  },
-  {
-    "categoria": "Sobremesas",
-    "itens": [
-      { "nome": "Pizza doce de chocolate", "descricao": "chocolate ao leite com morango", "preco": "42,00" },
-      { "nome": "Petit gateau", "descricao": "sorvete de creme e calda quente", "preco": "22,00" }
+      { "nome": "Suco natural", "descricao": "sabores da estação (500ml)", "preco": 12 },
+      { "nome": "Refrigerante lata", "descricao": "diversos sabores (350ml)", "preco": 8 },
+      { "nome": "Cerveja artesanal", "descricao": "long neck, rótulos selecionados", "preco": 18 }
     ]
   }
 ]
