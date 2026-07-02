@@ -11,7 +11,7 @@
   --ink-dim: #a9a097;
   --ink-faint: #6f665e;
 
-  --wine: #6e0d12;
+  --wine: #680404;
   --wine-2: #9a1b1f;
   --amber: #e8b04b;
   --amber-2: #c8862b;
@@ -147,6 +147,15 @@ body.cursor-on .cursor-glow { opacity: 1; }
 
 /* ===== Cardápio ===== */
 .menu-note { color: var(--ink-dim); font-size: 0.92rem; margin-top: 0.75rem; }
+
+/* Tamanhos (padrão benditta) */
+.tamanhos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.tamanho { border: 1px solid rgba(245, 239, 230, 0.1); border-top: 3px solid var(--wine);
+  border-radius: 0 0 4px 4px; padding: 1.25rem 1.4rem; background: var(--panel); }
+.tamanho .t-nome { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; }
+.tamanho .t-fatias { color: var(--amber); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; margin-top: 0.2rem; }
+.tamanho .t-desc { color: var(--ink-dim); font-size: 0.85rem; margin-top: 0.5rem; }
+@media (max-width: 640px) { .tamanhos { grid-template-columns: 1fr; } }
 .menu-cat { margin-top: 3.5rem; }
 .menu-cat > h3 { display: inline-flex; align-items: center; gap: 0.8rem; font-size: 1.9rem; color: var(--ink); }
 .menu-cat > h3::before { content: ""; width: 1.6rem; height: 2px; background: var(--wine-2); display: inline-block; }
