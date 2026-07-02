@@ -3,8 +3,8 @@
 (function () {
   "use strict";
 
-  // TODO: confirmar o WhatsApp real (celular) do Quintal. Landline não funciona no wa.me.
-  var WHATSAPP = "556934611766";
+  // NÚMERO DE TESTE (do Ismaile). TODO: trocar pelo WhatsApp real (celular) do Quintal.
+  var WHATSAPP = "5569999688625";
   var SIZES = [
     { key: "grande", nome: "Grande", fatias: "12 fatias · até 4 sabores" },
     { key: "media", nome: "Média", fatias: "8 fatias · até 3 sabores" },
